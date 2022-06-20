@@ -1,0 +1,11 @@
+.wrong {
+    color:red;
+    font-weight: 900;
+}
+.right {
+    color:green;
+    font-weight: 900;
+}
+.no-click {
+    pointer-events: none;
+}
