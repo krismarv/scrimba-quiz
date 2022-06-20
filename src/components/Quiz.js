@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import '../css/quiz.css'
 
-export default function Quiz () {
+export default function Quiz (props) {
 
     const [questions, setQuestions] = React.useState([])
     const [questionElements, setQuestionElements] = React.useState([])
@@ -13,7 +13,7 @@ export default function Quiz () {
         fetch("https://opentdb.com/api_token.php?command=request")
             .then(res=>res.json())
             .then(data=>{
-                fetch(`https://opentdb.com/api.php?amount=${numberOfQuestions}&token=${data.token}`)
+                fetch(`https://opentdb.com/api.php?amount=${numberOfQuestions}&token=${data.token}${props.category==="all" ? "" : `&category=${props.category}`}`)
                     .then(res=>res.json())
                     .then(data=>{
                         setQuestions(data.results);
@@ -91,6 +91,7 @@ export default function Quiz () {
                 {questionElements}
                 <div id="quiz-score"></div>
             </div>
+            <button className="bg-amber-400 h-10 quiz" onClick={props.restart}>Restart</button>
         </>
     )
 }
