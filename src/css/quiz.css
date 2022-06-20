@@ -1,9 +1,13 @@
 .wrong {
-    color:red;
+    color:#c4757d;
+    border-width: 4px;
+    border-color:#c4757d;
     font-weight: 900;
 }
 .right {
-    color:green;
+    color:#4b8e7d;
+    border-width: 4px;
+    border-color:#4b8e7d;
     font-weight: 900;
 }
 .no-click {

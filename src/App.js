@@ -14,11 +14,14 @@ function App() {
 
   return (
     <>
-      <main id="main" className="flex flex-col bg-slate-100 max-w-xl ml-auto mr-auto">
+      <main id="main" className="flex xs:flex-col md:flex-row bg-slate-100 max-w-xl ml-auto mr-auto">
+        <div className="circle z-0" id="circle-1" ></div>
+        <div className="circle z-0" id="circle-2"></div>
         {!play ? 
-          <Main  play={playNow}/>
-          : <Quiz />
+          <Main  className="z-50" play={playNow}/>
+          : <Quiz className="z-50" />
         }
+        
       </main>      
     </>
   );

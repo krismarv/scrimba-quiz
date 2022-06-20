@@ -33,21 +33,22 @@ export default function Quiz () {
                             return (
                                 <>
                                     <div key={index} className="question" dangerouslySetInnerHTML={{__html:question.question}}></div>
-                                    <div className="answers mt-4 mb-4">{question["answers"].map((answer, aIndex)=>{
-                                        return <span 
+                                    <div className="answers mt-6 mb-6 break-all">{question["answers"].map((answer, aIndex)=>{
+                                        return <div 
                                                     key={`${index}-answer-${aIndex}`} 
-                                                    className="answer border-solid border-2 border-neutral-600 rounded-full p-3 m-2 font-semibold mt-11 cursor-pointer hover:bg-neutral-300" 
+                                                    className="answer inline-block whitespace-nowrap border-solid border-2 border-neutral-600 rounded-full p-3 m-2 font-semibold mt-1 mb-1 cursor-pointer hover:bg-neutral-300" 
                                                     onClick={right} 
                                                     data-question={index} 
                                                     data-value={answer}
                                                     dangerouslySetInnerHTML={{__html:answer}}
-                                                ></span>
+                                                ></div>
                                         })}
                                     </div>
                                 </>            
                             )
                         })
                     setQuestionElements(questionElArray)
+                    return questionArray
                     })
             })            
     }, [numberOfQuestions])
@@ -56,22 +57,32 @@ export default function Quiz () {
     
 
     function right(event) {
-        let currentQ = questions[event.target.getAttribute("data-question")]
+        event.preventDefault()
+        setClicked(oldClicked=>{
+            return oldClicked+1
+        });
+        setQuestions(questions => {
+            let currentQ = questions[event.target.getAttribute("data-question")]
+        
         if (event.target.getAttribute("data-value")===currentQ.correct_answer) {
+            console.log("yes")
             event.target.classList.add("right");
-            setScore(score => score+1);
-            setClicked(clicked=>clicked+1)
+            setScore(prevScore => {return prevScore+1});
         } else {
             event.target.classList.add("wrong");
-            setClicked(clicked=>clicked+1)
         }
         let allQAnswers = document.querySelectorAll(`[data-question="${String(event.target.getAttribute("data-question"))}"]`)
         allQAnswers.forEach(a=> a.classList.add("no-click"))
-        if (clicked === numberOfQuestions-1) {
-            let scoreEl = document.querySelector("#quiz-score")
-            scoreEl.textContent = `You scored ${score} out of ${numberOfQuestions} questions.`
-        }
+        return questions
+        })
+        
     }
+
+    useEffect(()=> {
+        if (clicked === numberOfQuestions) {
+        let scoreEl = document.querySelector("#quiz-score")
+        scoreEl.textContent = `You scored ${score} out of ${numberOfQuestions} questions.`
+    }}, [clicked])
     
 
     return (
