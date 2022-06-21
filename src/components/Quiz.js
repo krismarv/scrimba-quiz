@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import '../css/quiz.css'
+import arrow from '../arrow-left.png'
 
 export default function Quiz (props) {
 
@@ -88,10 +89,12 @@ export default function Quiz (props) {
     return (
         <>
             <div className="question-container">
+                <img className="arrow" onClick={props.restart} style={{cursor:"pointer"}} src={arrow}></img>
                 {questionElements}
                 <div id="quiz-score"></div>
+                {clicked === numberOfQuestions ? <button className="bg-amber-400 h-10 quiz" onClick={props.restart}>Restart</button> : ""}
             </div>
-            <button className="bg-amber-400 h-10 quiz" onClick={props.restart}>Restart</button>
+            
         </>
     )
 }

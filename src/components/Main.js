@@ -13,7 +13,7 @@ export default function Main (props) {
         <>
             <img src={Img} alt="" className="max-h-72"></img>
             <div className="flex flex-col">
-                <h1 className="text-7xl" >Trivia <span className="handwritten">Quiz</span></h1>
+                <h1 className="text-7xl main-heading" >Trivia Quiz</h1>
                 <form onSubmit={props.play}>
                     <select value={props.category} onChange={props.changeCat} className="w-56 mt-8 h-9 p-2">
                         <option value="all">All categories</option>

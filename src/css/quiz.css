@@ -14,5 +14,12 @@
     pointer-events: none;
 }
 button.quiz {
-    
+    margin-top:2.5%;
+    padding:3%;
+    display:flex;
+    align-items: center;
+}
+.arrow {
+    height:40px;
+    margin-bottom:2.5%
 }
